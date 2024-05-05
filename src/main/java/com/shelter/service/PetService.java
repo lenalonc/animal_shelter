@@ -22,4 +22,6 @@ public interface PetService {
 
     public List<Pet> getAdoptedPets();
 
+    public List<String> getFieldNamesForAddPet();
+
 }

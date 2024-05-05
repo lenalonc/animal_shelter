@@ -1,13 +1,19 @@
 package com.shelter.service;
 
+import com.shelter.dtos.AnimalDTO;
 import com.shelter.dtos.PetCreateDTO;
 import com.shelter.dtos.PetDTO;
+import com.shelter.entities.Animal;
+import com.shelter.entities.Owner;
 import com.shelter.entities.Pet;
+import com.shelter.repository.AnimalRepossitory;
 import com.shelter.repository.PetRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +22,7 @@ public class PetServiceImpl implements PetService {
 
     @Autowired
     PetRepository petRepository;
+
 
     @Autowired
     ModelMapper mapper;
@@ -59,4 +66,19 @@ public class PetServiceImpl implements PetService {
     public List<Pet> getAdoptedPets() {
         return null;
     }
+
+
+    public List<String> getFieldNamesForAddPet() {
+        List<String> fieldNames = new ArrayList<>();
+        Field[] fields = PetCreateDTO.class.getDeclaredFields();
+        for (Field field : fields) {
+            String fieldName = field.getName();
+            if (!fieldName.equals("id") && !fieldName.equals("adopted")) {
+                fieldNames.add(fieldName);
+            }
+        }
+        return fieldNames;
+    }
+
+
 }
