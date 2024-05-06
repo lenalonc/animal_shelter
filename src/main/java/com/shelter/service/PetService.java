@@ -3,6 +3,7 @@ package com.shelter.service;
 import com.shelter.dtos.PetCreateDTO;
 import com.shelter.dtos.PetDTO;
 import com.shelter.entities.Pet;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -23,5 +24,7 @@ public interface PetService {
     public List<Pet> getAdoptedPets();
 
     public List<String> getFieldNamesForAddPet();
+
+    String savePicture(MultipartFile picture, String name);
 
 }

@@ -11,8 +11,14 @@ import com.shelter.repository.PetRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -78,6 +84,36 @@ public class PetServiceImpl implements PetService {
             }
         }
         return fieldNames;
+    }
+
+    @Override
+    public String savePicture(MultipartFile picture, String name) {
+        if (picture.isEmpty()) {
+            return "Picture is empty";
+        }
+
+        System.out.println(name+" name");
+
+        try {
+            // Specify the directory where you want to save the picture
+            String uploadDir = "C:/Users/user/Desktop/diplomski/shelter-front/shelter-front/src/img/pets";
+
+            // Create the directory if it doesn't exist
+            File directory = new File(uploadDir);
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+
+            // Save the picture to the specified directory
+            byte[] bytes = picture.getBytes();
+            Path filePath = Paths.get(uploadDir + '/' + name + ".jpg");
+            System.out.println(filePath.toString());
+            Files.write(filePath, bytes);
+
+            return "Picture saved successfully";
+        } catch (IOException e) {
+            return "Failed to save picture: " + e.getMessage();
+        }
     }
 
 

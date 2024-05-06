@@ -53,7 +53,7 @@ public class Pet {
     private String size;
 
     @Column(name = "weight")
-    private int weight;
+    private double weight;
 
     @Column(name = "date_of_arrival")
     private LocalDate dateOfArrival;

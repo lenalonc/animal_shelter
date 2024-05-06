@@ -37,7 +37,7 @@ public class PetCreateDTO {
 
     private String size;
 
-    private int weight;
+    private double weight;
 
     private LocalDate dateOfArrival;
 

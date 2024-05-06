@@ -9,6 +9,7 @@ import com.shelter.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/pet")
@@ -72,6 +73,11 @@ public class PetController {
     @GetMapping("/breeds/dog")
     public ResponseEntity<?> getDogBreeds() {
         return ResponseEntity.ok(breedService.getDogBreeds());
+    }
+
+    @PostMapping("/savePicture")
+    public String savePicture(@RequestParam("picture") MultipartFile picture, @RequestParam String name) {
+        return petService.savePicture(picture, name);
     }
 
 
