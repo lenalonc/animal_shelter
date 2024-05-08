@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "adoption_item")
@@ -26,6 +27,6 @@ public class AdoptionItem {
     @JoinColumn(name = "pet")
     private Pet pet;
 
-    @Column(name = "home_adaptation")
-    private int homeAdaptation;
+    @Column(name = "feedback")
+    private String feedback;
 }

@@ -1,6 +1,6 @@
 package com.shelter.service;
 
-import com.shelter.dtos.OwnerCreateDTO;
+import com.shelter.dtos.OwnerDTO;
 import com.shelter.entities.Owner;
 import com.shelter.repository.OwnerRepository;
 import org.modelmapper.ModelMapper;
@@ -37,12 +37,12 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public Owner createOwner(OwnerCreateDTO owner) {
+    public Owner createOwner(OwnerDTO owner) {
         return ownerRepository.save(mapper.map(owner, Owner.class));
     }
 
     @Override
-    public Owner updateOwner(OwnerCreateDTO owner, Long id) {
+    public Owner updateOwner(OwnerDTO owner, Long id) {
         owner.setId(id);
         return ownerRepository.save(mapper.map(owner, Owner.class));
     }

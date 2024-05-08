@@ -23,7 +23,7 @@ public class Administrator {
     private Long id;
 
     @Column(name = "firstname")
-    private String firstName;
+    private String firstname;
 
     @Column(name = "lastname")
     private String lastname;
