@@ -19,7 +19,7 @@ public class AdoptionDTO {
 
     private OwnerDTO owner;
 
-    private Administrator admin;
+    private AdministratorDTO admin;
 
     private List<AdoptionItemDTO> pets;
 }

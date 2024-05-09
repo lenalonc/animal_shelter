@@ -15,4 +15,6 @@ public interface AdoptionService {
 
     public void deleteAdoption(Long id);
 
+    public AdoptionDTO getAdoptionById(Long id);
+
 }

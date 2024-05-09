@@ -1,9 +1,13 @@
 package com.shelter.service;
 
 import com.shelter.dtos.AdoptionDTO;
+import com.shelter.dtos.PetDTO;
 import com.shelter.entities.Adoption;
+import com.shelter.entities.AdoptionItem;
+import com.shelter.entities.Pet;
 import com.shelter.repository.AdoptionItemRepository;
 import com.shelter.repository.AdoptionRepository;
+import com.shelter.repository.PetRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,9 @@ public class AdoptionServiceImpl implements AdoptionService {
     AdoptionItemRepository adoptionItemRepository;
 
     @Autowired
+    PetRepository petRepository;
+
+    @Autowired
     ModelMapper mapper;
 
 
@@ -28,8 +35,13 @@ public class AdoptionServiceImpl implements AdoptionService {
     @Override
     public AdoptionDTO createAdoption(AdoptionDTO adoptionDTO) {
         Adoption adoption = mapper.map(adoptionDTO, Adoption.class);
-        System.out.println(adoption.getAdmin());
         Adoption finalAdoption = adoptionRepository.save(adoption);
+
+        for (AdoptionItem ai : adoption.getPets()
+        ) {
+            ai.getPet().setAdopted(true);
+            petRepository.save(ai.getPet());
+        }
 
         adoption.getPets().forEach(pet -> pet.setAdoption(adoption));
         adoptionItemRepository.saveAll(adoption.getPets());
@@ -45,11 +57,30 @@ public class AdoptionServiceImpl implements AdoptionService {
 
     @Override
     public List<AdoptionDTO> getAllAdoptions() {
-        return null;
+        List<Adoption> adoptions = adoptionRepository.findAll();
+        for (Adoption adoption : adoptions
+        ) {
+            adoption.setPets(adoptionItemRepository.findByAdoption_Id(adoption.getId()));
+        }
+        return adoptions.stream().map(adoption -> mapper.map(adoption, AdoptionDTO.class)).toList();
     }
+
 
     @Override
     public void deleteAdoption(Long id) {
+        Adoption adoption = adoptionRepository.findById(id).orElseThrow();
+        for (AdoptionItem adoptionItem : adoption.getPets()
+        ) {
+            adoptionItem.getPet().setAdopted(false);
+            petRepository.save(adoptionItem.getPet());
+        }
+        //should i delete every adoption item manually or should i leave to db, or put the annotation for cascade deleting
+        adoptionRepository.deleteById(id);
+    }
 
+    @Override
+    public AdoptionDTO getAdoptionById(Long id) {
+        Adoption adoption = adoptionRepository.findById(id).orElseThrow();
+        return mapper.map(adoption, AdoptionDTO.class);
     }
 }

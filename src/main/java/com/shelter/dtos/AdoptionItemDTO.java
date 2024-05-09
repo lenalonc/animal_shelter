@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 public class AdoptionItemDTO {
     private Long id;
 
-    private AdoptionDTO adoption;
-
     private PetDTO pet;
 
     private String feedback;
