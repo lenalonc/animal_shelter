@@ -29,9 +29,19 @@ public class PetController {
         return ResponseEntity.ok(petService.createPet(pet));
     }
 
-    @GetMapping()
+    @GetMapping("/all")
     public ResponseEntity<?> getAllPets() {
         return ResponseEntity.ok(petService.getAllPets());
+    }
+
+    @GetMapping("/adopted")
+    public ResponseEntity<?> getAllAdoptedPets() {
+        return ResponseEntity.ok(petService.getAdoptedPets());
+    }
+
+    @GetMapping()
+    public ResponseEntity<?> getAllPetsForAdoption() {
+        return ResponseEntity.ok(petService.getPetsForAdoption());
     }
 
     @GetMapping("/{id}")

@@ -1,7 +1,9 @@
 package com.shelter.service;
 
 import com.shelter.dtos.OwnerDTO;
+import com.shelter.dtos.PetDTO;
 import com.shelter.entities.Owner;
+import com.shelter.entities.Pet;
 import com.shelter.repository.OwnerRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,9 @@ public class OwnerServiceImpl implements OwnerService {
     private ModelMapper mapper;
 
     @Override
-    public List<Owner> getAllOwners() {
-        return ownerRepository.findAll();
+    public List<OwnerDTO> getAllOwners() {
+        List<Owner> owners = ownerRepository.findAll();
+        return owners.stream().map(owner -> mapper.map(owner, OwnerDTO.class)).toList();
     }
 
     @Override

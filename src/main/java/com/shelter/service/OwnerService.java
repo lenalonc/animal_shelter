@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface OwnerService {
 
-    public List<Owner> getAllOwners();
+    public List<OwnerDTO> getAllOwners();
 
     public Owner getOwnerById(Long id);
 

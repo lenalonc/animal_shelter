@@ -3,6 +3,7 @@ package com.shelter.service;
 import com.shelter.dtos.AnimalDTO;
 import com.shelter.dtos.PetCreateDTO;
 import com.shelter.dtos.PetDTO;
+import com.shelter.entities.Adoption;
 import com.shelter.entities.Animal;
 import com.shelter.entities.Owner;
 import com.shelter.entities.Pet;
@@ -47,7 +48,6 @@ public class PetServiceImpl implements PetService {
     @Override
     public PetDTO getPetById(Long id) {
         Pet pet = petRepository.findById(id).orElseThrow();
-//        return mapper.map(pet, PetDTO.class);
         return mapper.map(pet, PetDTO.class);
     }
 
@@ -59,18 +59,20 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public void deletePet(Long id) {
-        //petRepository.findById(id).orElseThrow(new Error("Pet doesnt exist."));
+        Pet pet = petRepository.findById(id).orElseThrow();
         petRepository.deleteById(id);
     }
 
     @Override
-    public List<Pet> getPetsForAdoption() {
-        return null;
+    public List<PetDTO> getPetsForAdoption() {
+        List<Pet> pets = petRepository.findByAdoptedFalse();
+        return pets.stream().map(pet -> mapper.map(pet, PetDTO.class)).toList();
     }
 
     @Override
-    public List<Pet> getAdoptedPets() {
-        return null;
+    public List<PetDTO> getAdoptedPets() {
+        List<Pet> pets = petRepository.findByAdoptedTrue();
+        return pets.stream().map(pet -> mapper.map(pet, PetDTO.class)).toList();
     }
 
 
@@ -92,7 +94,7 @@ public class PetServiceImpl implements PetService {
             return "Picture is empty";
         }
 
-        System.out.println(name+" name");
+        System.out.println(name + " name");
 
         try {
             // Specify the directory where you want to save the picture
