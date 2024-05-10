@@ -1,10 +1,9 @@
 package com.shelter.service;
 
 import com.shelter.dtos.OwnerDTO;
-import com.shelter.dtos.PetDTO;
-import com.shelter.entities.Owner;
-import com.shelter.entities.Pet;
-import com.shelter.repository.OwnerRepository;
+import com.shelter.dtos.UserDTO;
+import com.shelter.entities.User;
+import com.shelter.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,50 +15,52 @@ import java.lang.reflect.Field;
 
 
 @Service
-public class OwnerServiceImpl implements OwnerService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
-    private OwnerRepository ownerRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private ModelMapper mapper;
 
     @Override
     public List<OwnerDTO> getAllOwners() {
-        List<Owner> owners = ownerRepository.findAll();
+        List<User> owners = userRepository.findByRole("customer");
         return owners.stream().map(owner -> mapper.map(owner, OwnerDTO.class)).toList();
     }
 
     @Override
-    public Owner getOwnerById(Long id) {
-        Optional<Owner> owner = ownerRepository.findById(id);
-        if (owner.isEmpty()) {
-            System.out.println("Stavi da se baca greska nOtFOund");
-        }
-        return owner.get();
+    public OwnerDTO getOwnerById(Long id) {
+        User owner = userRepository.findById(id).orElseThrow();
+        return mapper.map(owner, OwnerDTO.class);
     }
 
     @Override
-    public Owner createOwner(OwnerDTO owner) {
-        return ownerRepository.save(mapper.map(owner, Owner.class));
+    public OwnerDTO createUser(UserDTO owner) {
+        return mapper.map(userRepository.save(mapper.map(owner, User.class)), OwnerDTO.class);
     }
 
     @Override
-    public Owner updateOwner(OwnerDTO owner, Long id) {
+    public OwnerDTO updateOwner(OwnerDTO owner, Long id) {
         owner.setId(id);
-        return ownerRepository.save(mapper.map(owner, Owner.class));
+        return mapper.map(userRepository.save(mapper.map(owner, User.class)), OwnerDTO.class);
+
     }
 
     @Override
     public void deleteOwner(Long id) {
-        ownerRepository.deleteById(id);
+        User owner = userRepository.findById(id).orElseThrow();
+        if (!owner.getRole().equals("customer")) {
+            //baci gresku
+        }
+        userRepository.deleteById(id);
     }
 
 
     @Override
     public List<String> getFieldNamesForAddOwner() {
         List<String> fieldNames = new ArrayList<>();
-        Field[] fields = Owner.class.getDeclaredFields();
+        Field[] fields = OwnerDTO.class.getDeclaredFields();
         for (Field field : fields) {
             String fieldName = field.getName();
             if (!fieldName.equals("adoptions") && !fieldName.equals("id")) {

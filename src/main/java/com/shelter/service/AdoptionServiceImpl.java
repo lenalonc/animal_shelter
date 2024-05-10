@@ -1,10 +1,8 @@
 package com.shelter.service;
 
 import com.shelter.dtos.AdoptionDTO;
-import com.shelter.dtos.PetDTO;
 import com.shelter.entities.Adoption;
 import com.shelter.entities.AdoptionItem;
-import com.shelter.entities.Pet;
 import com.shelter.repository.AdoptionItemRepository;
 import com.shelter.repository.AdoptionRepository;
 import com.shelter.repository.PetRepository;

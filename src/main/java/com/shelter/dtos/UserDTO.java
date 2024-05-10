@@ -8,10 +8,11 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class OwnerDTO {
+@NoArgsConstructor
+@Data
+public class UserDTO {
+
     private Long id;
 
     @NotBlank
@@ -26,7 +27,12 @@ public class OwnerDTO {
     @NotBlank
     private String email;
 
+    @NotBlank
+    private String password;
+
     @NotNull
     private LocalDate dateOfBirth;
-    
+
+    private String role;
+
 }

@@ -1,6 +1,5 @@
 package com.shelter.dtos;
 
-import com.shelter.entities.Administrator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

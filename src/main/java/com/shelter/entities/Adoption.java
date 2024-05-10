@@ -1,5 +1,7 @@
 package com.shelter.entities;
 
+import com.shelter.dtos.AdministratorDTO;
+import com.shelter.dtos.OwnerDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,11 +29,11 @@ public class Adoption {
 
     @ManyToOne
     @JoinColumn(name = "owner")
-    private Owner owner;
+    private User owner;
 
     @ManyToOne
     @JoinColumn(name = "admin")
-    private Administrator admin;
+    private User admin;
 
     @OneToMany(mappedBy = "adoption")
     private List<AdoptionItem> pets;

@@ -1,13 +1,8 @@
 package com.shelter.service;
 
-import com.shelter.dtos.AnimalDTO;
 import com.shelter.dtos.PetCreateDTO;
 import com.shelter.dtos.PetDTO;
-import com.shelter.entities.Adoption;
-import com.shelter.entities.Animal;
-import com.shelter.entities.Owner;
 import com.shelter.entities.Pet;
-import com.shelter.repository.AnimalRepossitory;
 import com.shelter.repository.PetRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +17,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PetServiceImpl implements PetService {

@@ -71,7 +71,7 @@ public class PetController {
     }
 
     @GetMapping("/animals")
-    public ResponseEntity<?> gteAnimals() {
+    public ResponseEntity<?> getAnimals() {
         return ResponseEntity.ok(animalService.getAnimalTypes());
     }
 
