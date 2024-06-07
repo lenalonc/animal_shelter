@@ -6,11 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
-    private Long id;
-
+@AllArgsConstructor
+public class UpdateOwnerDTO {
     @NotBlank
     private String firstname;
 

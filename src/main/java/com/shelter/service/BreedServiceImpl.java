@@ -22,7 +22,6 @@ public class BreedServiceImpl implements BreedService {
 
     @Override
     public BreedDTO createBreed(Breed breed) {
-        System.out.println(breed);
         return mapper.map(breedRepository.save(breed), BreedDTO.class);
     }
 

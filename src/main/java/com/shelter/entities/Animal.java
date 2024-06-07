@@ -1,6 +1,5 @@
 package com.shelter.entities;
 
-import com.shelter.enums.AnimalEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

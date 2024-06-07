@@ -31,17 +31,15 @@ public class User implements UserDetails {
     @Column(name = "lastname")
     private String lastname;
 
-    @Column(name = "date_of_birth")
-    private LocalDate dateOfBirth;
-
     @Column(name = "username", unique = true)
     private String username;
+
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name = "email")
-    private String email;
 
     @Column(name = "role")
     private String role;

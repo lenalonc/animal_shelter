@@ -3,6 +3,7 @@ package com.shelter.service;
 import com.shelter.dtos.PetCreateDTO;
 import com.shelter.dtos.PetDTO;
 import com.shelter.entities.Pet;
+import com.shelter.exceptions.NotFoundException;
 import com.shelter.repository.PetRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,19 +42,20 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public PetDTO getPetById(Long id) {
-        Pet pet = petRepository.findById(id).orElseThrow();
+        Pet pet = petRepository.findById(id).orElseThrow(() -> new NotFoundException("Pet not found"));
         return mapper.map(pet, PetDTO.class);
     }
 
     @Override
-    public Pet updatePet(Pet pet, Long id) {
+    public PetDTO updatePet(Pet pet, Long id) {
+        Pet p = petRepository.findById(id).orElseThrow(() -> new NotFoundException("Pet not found."));
         pet.setId(id);
-        return petRepository.save(pet);
+        return mapper.map(petRepository.save(pet), PetDTO.class);
     }
 
     @Override
     public void deletePet(Long id) {
-        Pet pet = petRepository.findById(id).orElseThrow();
+        Pet pet = petRepository.findById(id).orElseThrow(() -> new NotFoundException("Pet not found."));
         petRepository.deleteById(id);
     }
 
@@ -88,19 +90,14 @@ public class PetServiceImpl implements PetService {
             return "Picture is empty";
         }
 
-        System.out.println(name + " name");
-
         try {
-            // Specify the directory where you want to save the picture
             String uploadDir = "C:/Users/user/Desktop/diplomski/shelter-front/shelter-front/src/img/pets";
 
-            // Create the directory if it doesn't exist
             File directory = new File(uploadDir);
             if (!directory.exists()) {
                 directory.mkdirs();
             }
 
-            // Save the picture to the specified directory
             byte[] bytes = picture.getBytes();
             Path filePath = Paths.get(uploadDir + '/' + name + ".jpg");
             System.out.println(filePath.toString());
@@ -111,6 +108,5 @@ public class PetServiceImpl implements PetService {
             return "Failed to save picture: " + e.getMessage();
         }
     }
-
 
 }

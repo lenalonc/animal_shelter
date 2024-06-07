@@ -26,7 +26,4 @@ public class OwnerDTO {
     @NotBlank
     private String email;
 
-    @NotNull
-    private LocalDate dateOfBirth;
-    
 }

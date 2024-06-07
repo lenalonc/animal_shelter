@@ -7,14 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdministratorDTO {
+public class LikedPetsDTO {
 
     private Long id;
 
-    private String username;
+    private OwnerDTO owner;
 
-    private String firstname;
-
-    private String lastname;
-
+    private PetDTO pet;
 }

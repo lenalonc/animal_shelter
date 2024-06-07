@@ -5,10 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+@Data
+public class CreateUserDTO {
+
     private Long id;
 
     @NotBlank
@@ -23,5 +24,9 @@ public class UserDTO {
     @NotBlank
     private String email;
 
-    private String role;
+    @NotBlank
+    private String password;
+
+    private String role = "customer";
+
 }

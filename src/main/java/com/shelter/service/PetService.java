@@ -15,7 +15,7 @@ public interface PetService {
 
     public PetDTO getPetById(Long id);
 
-    public Pet updatePet(Pet pet, Long id);
+    public PetDTO updatePet(Pet pet, Long id);
 
     public void deletePet(Long id);
 

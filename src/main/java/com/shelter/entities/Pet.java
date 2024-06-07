@@ -1,7 +1,6 @@
 package com.shelter.entities;
 
-import com.shelter.enums.AnimalEnum;
-import com.shelter.enums.Sex;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

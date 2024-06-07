@@ -3,6 +3,7 @@ package com.shelter.service;
 import com.shelter.dtos.AdoptionDTO;
 import com.shelter.entities.Adoption;
 import com.shelter.entities.AdoptionItem;
+import com.shelter.exceptions.NotFoundException;
 import com.shelter.repository.AdoptionItemRepository;
 import com.shelter.repository.AdoptionRepository;
 import com.shelter.repository.PetRepository;
@@ -49,6 +50,7 @@ public class AdoptionServiceImpl implements AdoptionService {
 
     @Override
     public AdoptionDTO updateAdoption(Adoption adoption, Long id) {
+        Adoption adoption1 = adoptionRepository.findById(id).orElseThrow(() -> new NotFoundException("Adoption not found."));
         adoption.setId(id);
         return mapper.map(adoptionRepository.save(adoption), AdoptionDTO.class);
     }
@@ -66,7 +68,7 @@ public class AdoptionServiceImpl implements AdoptionService {
 
     @Override
     public void deleteAdoption(Long id) {
-        Adoption adoption = adoptionRepository.findById(id).orElseThrow();
+        Adoption adoption = adoptionRepository.findById(id).orElseThrow(() -> new NotFoundException("Adoption not found."));
         for (AdoptionItem adoptionItem : adoption.getPets()
         ) {
             adoptionItem.getPet().setAdopted(false);
@@ -78,7 +80,7 @@ public class AdoptionServiceImpl implements AdoptionService {
 
     @Override
     public AdoptionDTO getAdoptionById(Long id) {
-        Adoption adoption = adoptionRepository.findById(id).orElseThrow();
+        Adoption adoption = adoptionRepository.findById(id).orElseThrow(() -> new NotFoundException("Adoption not found."));
         return mapper.map(adoption, AdoptionDTO.class);
     }
 }
