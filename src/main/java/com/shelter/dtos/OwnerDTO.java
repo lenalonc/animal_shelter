@@ -26,4 +26,6 @@ public class OwnerDTO {
     @NotBlank
     private String email;
 
+    private String role;
+
 }
