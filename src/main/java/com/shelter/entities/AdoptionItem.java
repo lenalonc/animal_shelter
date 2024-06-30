@@ -27,6 +27,4 @@ public class AdoptionItem {
     @JoinColumn(name = "pet")
     private Pet pet;
 
-    @Column(name = "feedback")
-    private String feedback;
 }

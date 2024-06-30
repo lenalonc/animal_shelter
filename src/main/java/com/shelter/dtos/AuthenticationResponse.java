@@ -1,4 +1,4 @@
-package com.shelter.entities;
+package com.shelter.dtos;
 
 import com.shelter.dtos.CreateUserDTO;
 import com.shelter.dtos.UserDTO;

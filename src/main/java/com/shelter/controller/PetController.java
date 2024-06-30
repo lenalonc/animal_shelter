@@ -36,12 +36,12 @@ public class PetController {
 
     @GetMapping("/adopted")
     public ResponseEntity<?> getAllAdoptedPets() {
-        return ResponseEntity.ok(petService.getAdoptedPets());
+        return ResponseEntity.ok(petService.getAllAdoptedPets());
     }
 
     @GetMapping()
     public ResponseEntity<?> getAllPetsForAdoption() {
-        return ResponseEntity.ok(petService.getPetsForAdoption());
+        return ResponseEntity.ok(petService.getAllPetsForAdoption());
     }
 
     @GetMapping("/{id}")

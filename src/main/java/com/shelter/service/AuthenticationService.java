@@ -2,9 +2,8 @@ package com.shelter.service;
 
 import com.shelter.dtos.EmailData;
 import com.shelter.dtos.UserDTO;
-import com.shelter.entities.AuthenticationResponse;
+import com.shelter.dtos.AuthenticationResponse;
 import com.shelter.entities.User;
-import com.shelter.exceptions.BadRequestException;
 import com.shelter.exceptions.NotFoundException;
 import com.shelter.exceptions.ValidationException;
 import com.shelter.repository.UserRepository;

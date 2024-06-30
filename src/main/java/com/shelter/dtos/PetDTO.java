@@ -42,6 +42,6 @@ public class PetDTO {
 
     private String primaryColors;
 
-//    private boolean adopted;
+    private boolean adopted;
 
 }

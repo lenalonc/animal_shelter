@@ -60,13 +60,13 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public List<PetDTO> getPetsForAdoption() {
+    public List<PetDTO> getAllPetsForAdoption() {
         List<Pet> pets = petRepository.findByAdoptedFalse();
         return pets.stream().map(pet -> mapper.map(pet, PetDTO.class)).toList();
     }
 
     @Override
-    public List<PetDTO> getAdoptedPets() {
+    public List<PetDTO> getAllAdoptedPets() {
         List<Pet> pets = petRepository.findByAdoptedTrue();
         return pets.stream().map(pet -> mapper.map(pet, PetDTO.class)).toList();
     }

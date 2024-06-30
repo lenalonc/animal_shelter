@@ -19,9 +19,9 @@ public interface PetService {
 
     public void deletePet(Long id);
 
-    public List<PetDTO> getPetsForAdoption();
+    public List<PetDTO> getAllPetsForAdoption();
 
-    public List<PetDTO> getAdoptedPets();
+    public List<PetDTO> getAllAdoptedPets();
 
     public List<String> getFieldNamesForAddPet();
 
